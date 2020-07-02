@@ -5,7 +5,8 @@ import RecipeDetailsHeader from '../components/RecipeDetailsHeader'
 import RecipeIngredientsSection from '../components/RecipeIngredientsSection'
 import RecipeInstructionsSection from '../components/RecipeInstructionsSection'
 
-export default function RecipeDetails({ route, navigation }) {
+export default function RecipeDetails({ route }) {
+    //init the recipe parameter sent through the react navigation from the previous screen
     const { recipe } = route.params;
     const { scrollviewStyle, introductionText } = styles
 
@@ -14,10 +15,12 @@ export default function RecipeDetails({ route, navigation }) {
             <RecipeDetailsHeader recipe={recipe}/>
             <Text style={introductionText}>{recipe.introduction}</Text>
 
+            {/* display the list of ingredients if the recipe contains any */}
             {recipe && recipe.ingredients.length > 0 &&
                 <RecipeIngredientsSection ingredients={recipe.ingredients[0].ingredients}/>
             }
 
+            {/* display the list of methods if the recipe contains any */}
             {recipe && recipe.method.length > 0 &&
                 <RecipeInstructionsSection methods={recipe.method}/>
             }

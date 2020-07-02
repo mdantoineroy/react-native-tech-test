@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import Icon from 'react-native-vector-icons/SimpleLineIcons';
+
+import RecipeInfo from './RecipeInfo'
 
 export default function SearchView(props) {
-    let total_time = props.recipe.total_time.split('PT')[1] || "N/A"
-    let imageSrc = props.recipe.media.length > 0 ? { uri: props.recipe.media[0].uri } : require('../images/nofood.jpg')
     const { container, touchableContainer, logo, detailsContainer, iconsRow, row, textToIcon } = styles
+    //format total_time value and set the variable to N/A if total_time is empty
+    let total_time = props.recipe.total_time.split('PT')[1] || "N/A"
+    //init which image the component is going to render, either the recipe contains a media (pick the first one from the array) or display the default picture
+    let imageSrc = props.recipe.media.length > 0 ? { uri: props.recipe.media[0].uri } : require('../images/nofood.jpg')
 
     return (
         <View style={container}>
             <TouchableOpacity onPress={() => props.onPress(props.recipe)} style={touchableContainer}>
+                {/* render the image from the imageSrc */}
                 <Image
                     style={logo}
                     source={imageSrc}
@@ -18,16 +22,10 @@ export default function SearchView(props) {
                 <View style={detailsContainer}>
                     <Text>{props.recipe.name}</Text>
 
+                    {/* display the total_time and number of serves with the icons */}
                     <View style={iconsRow}>
-                        <View style={row}>
-                            <Icon name="clock" size={20} color="black"/>
-                            <Text style={textToIcon}>{total_time.toLowerCase()}</Text>
-                        </View>
-
-                        <View style={row}>
-                            <Icon name="pie-chart" size={20} color="black"/>
-                            <Text style={textToIcon}>serve(s) {props.recipe.serves}</Text>
-                        </View>
+                        <RecipeInfo iconName="clock" text={total_time.toLowerCase()}/>
+                        <RecipeInfo iconName="pie-chart" text={"serve(s) " + props.recipe.serves}/>
                     </View>
                 </View>
                 
