@@ -10,6 +10,7 @@ export default function RecipeInstructionsSection(props) {
         <View style={container}>
             <Text style={textToIcon}>Steps</Text>
             <View style={instructionsList}>
+                {/* map through the list of methods and display the component RecipeStep */}
                 {props.methods.map((method, key) => <RecipeSteps key={key} count={key + 1} steps={method.steps}/>)}
             </View>
         </View>

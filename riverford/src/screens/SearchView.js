@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, FlatList, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import { useQuery } from '@apollo/react-hooks';
 import { useSelector, useDispatch } from 'react-redux'
 import DeviceInfo from 'react-native-device-info';
@@ -14,7 +14,6 @@ export default function SearchView({navigation}) {
     //init the hooks and get the persisted store 'recipes'
     const recipes = useSelector(state => state)
     const [searchText, setSearchText] = useState("")
-    const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width)
     const dispatch = useDispatch()
     //execute graphQL request
     const {data, error, loading} = useQuery(FETCH_RECIPES, 
@@ -28,11 +27,6 @@ export default function SearchView({navigation}) {
             recipe: recipe
         })
     }
-
-    //listener to modify layout when orientation changes
-    Dimensions.addEventListener('change', () => {
-        setScreenWidth(Dimensions.get('window').width)
-    })
 
     //render the flatlist item
     const renderItem = ({ item }) => {

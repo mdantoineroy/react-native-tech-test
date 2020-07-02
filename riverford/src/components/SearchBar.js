@@ -9,13 +9,15 @@ export default function SearchBar(props) {
 
     return (
         <View style={container}>
+            {/* textInput to handle the search query */}
             <TextInput
                 style={inputStyle}
                 onChangeText={text => props.onChangeText(text)}
                 placeholder={'Search recipe'}
                 value={props.searchText}
             /> 
-                
+            
+            {/* show an indicator if the variable 'loading' from the parent view is true */}
             {props.loading && 
                 <MaterialIndicator color='green' size={30}/>
             }

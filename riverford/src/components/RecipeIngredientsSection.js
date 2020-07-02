@@ -8,6 +8,7 @@ export default function RecipeIngredientsSection(props) {
         <View style={container}>
             <Text style={textToIcon}>Ingredients</Text>
             <View style={ingredientList}>
+                {/* map through the list of ingredients and renders a Text tag with a bullet point */}
                 {props.ingredients.map((prop, key) => <Text key={key}>{`\u2022 ${prop}`}</Text> )}
             </View>
         </View>

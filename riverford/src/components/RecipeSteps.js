@@ -8,6 +8,7 @@ export default function RecipeInstructionsSection(props) {
         <View style={container}>
             <Text style={instructionNumber}>{props.count}.</Text>
             <View style={instructionContainer}>
+                {/* map through the list of steps from the recipe */}
                 {props.steps.map((step, stepKey) => <Text key={stepKey} style={instructionText}>{step}</Text> )}
             </View>
         </View>
